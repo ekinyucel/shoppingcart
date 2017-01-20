@@ -1,8 +1,17 @@
-var express = require("express");
+const express = require('express');
+const path = require('path');
+const http = require('http');
 
-var app = express();
+const app = express();
 
-app.use('/public', express.static(__dirname + '/public'));
-app.use('/node_modules', express.static(__dirname + '/node_modules'));
+app.use(express.static(path.join(__dirname, 'dist')));
 
-app.listen('3000', function() { console.log('Server is running at http://localhost:3000'); })
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
+
+const port = process.env.PORT || '3000';
+app.set('port', port);
+
+const server = http.createServer(app);
+server.listen(port, () => console.log(`Server is listening on localhost:${port}`));
