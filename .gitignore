@@ -33,3 +33,4 @@ npm-debug.log
 typings/
 typings.json
 jsconfig.json
+systemjs.config.js
