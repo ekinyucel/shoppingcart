@@ -8,11 +8,7 @@ export class ProductsService {
   constructor(private http: Http) { }
 
   getAllProducts(){
-
-    console.log("aa " + this.http.get('/api/posts')
-      .map(res => res.json()));
-
-    return this.http.get('/api/posts')
+    return this.http.get('/api/products')
       .map(res => res.json());
   }
 

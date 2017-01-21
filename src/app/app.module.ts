@@ -7,6 +7,7 @@ import { routing,
          appRoutingProviders }  from './app.routing.module';
 
 import { ProductsService } from './products/products.service';
+import { KeysPipe } from './pipes/KeysPipe';
 
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
@@ -14,7 +15,8 @@ import { ProductsComponent } from './products/products.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ProductsComponent
+    ProductsComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
