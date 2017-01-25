@@ -1,6 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var csrf = require('csurf'); // CSRF token middleware
+var passport = require('passport');
+
 var Product = require('../models/product');
+
+var csrfProtection = csrf();
+router.use(csrfProtection); // all routes by managed this router should use csrfProtection
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
