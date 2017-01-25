@@ -1,18 +1,20 @@
+<h2>Product List</h2>
 {{# each products }}
   <div class="row">
     {{# each this }}
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img src="{{this.imagePath}}" alt="..." class="img-responsive">
-          <div class="caption">
-            <h3>{{this.title}}</h3>
-            <p class="description">{{this.description}}</p>
-            <div class="clearfix">
-              <div class="price pull-left">${{this.price}}</div>
+      <div class="col-sm-6 col-md-3">
+        <div class="card cardstyles">
+          <img src="{{this.imagePath}}" alt="..." class="card-img-top img-fluid">
+          <div class="card-block">
+            <h3 class="card-title">{{this.title}}</h3>
+            <div class="card-subtitle price">${{this.price}}</div>
+            <h5 class="card-text"><a href="#">{{this.category}}</a></h5>
+            <p class="card-text">{{this.description}}</p>
+            <div class="clearfix">              
               <a href="/add-to-cart/{{this._id}}" class="btn btn-success pull-right" role="button">Add to Cart</a>
             </div>
           </div>
-        </div><!-- thumbnail -->
+        </div><!-- card -->
       </div><!-- col-sm-6 col-md-4 -->
     {{/each}}
   </div>

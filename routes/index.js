@@ -13,7 +13,7 @@ router.use(csrfProtection); // all routes by managed this router should use csrf
 router.get('/', function(req, res, next) {
   Product.find(function(err, data){
     var chunks = [];
-    var chunksize = 3; // col-md-4 fits with 3
+    var chunksize = 4; // col-md-4 fits with 3
     for(var i=0; i < data.length; i += chunksize){
       chunks.push(data.slice(i, i + chunksize));
     }
