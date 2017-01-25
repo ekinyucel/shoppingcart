@@ -1,4 +1,5 @@
 var express = require('express');
+var redis = require('redis');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -6,7 +7,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressHbs = require('express-handlebars');
 var mongoose = require('mongoose');
-var session = require('express-session');
+var session = require('express-session'); // sessions
+var MongoStore = require('connect-mongo')(session); // store sessions in the mongo
 var passport = require('passport'); // user operations
 var flash = require('connect-flash');
 var validator = require('express-validator'); // form validation
@@ -30,15 +32,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(validator());
 app.use(cookieParser());
-app.use(session({ secret: '5544224', resave: false, saveUninitialized: false }));
+app.use(session({
+  secret: '545856', // use better secret in prod
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }), // store sessions in mongo
+  cookie: { maxAge: 100 * 60 * 1000 }
+}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next){
-  console.log("logged in status: " + req.isAuthenticated());
   res.locals.login = req.isAuthenticated();
+  res.locals.session = req.session;
+  console.log("local: " + res.locals.session);
   next();
 });
 

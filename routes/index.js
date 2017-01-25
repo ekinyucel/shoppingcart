@@ -3,6 +3,7 @@ var router = express.Router();
 var csrf = require('csurf'); // CSRF token middleware
 var passport = require('passport');
 
+var Cart = require('../models/cart');
 var Product = require('../models/product');
 
 var csrfProtection = csrf();
@@ -18,6 +19,24 @@ router.get('/', function(req, res, next) {
     }
     res.render('index', { title: 'Shopping cart', products: chunks });
   });  
+});
+
+router.get('/add-to-cart/:id', function(req, res, next){
+  var productId = req.params.id; // get productid from request parameters
+  var cart = new Cart(req.session.cart ? req.session.cart : { items: {} }); // if cart is empty, create an empty cart
+
+  Product.findById(productId, function(err, product){
+    if(err) return res.redirect('/');
+    cart.add(product, product.id); // add product to cart
+    req.session.cart = cart; // store cart in the cookie
+    res.redirect('/');
+  });
+});
+
+router.get('/shopping-cart', function(req, res, next){
+  if(!req.session.cart) return res.render('shop/shopping-cart', {products: null});
+  var cart = new Cart(req.session.cart);
+  res.render('shop/shopping-cart', { products: cart.generateArray(), totalPrice: cart.totalPrice });
 });
 
 module.exports = router;
