@@ -1,21 +1,48 @@
-<h2>Product List</h2>
-{{# each products }}
-  <div class="row">
-    {{# each this }}
-      <div class="col-sm-6 col-md-3">
-        <div class="card cardstyles">
-          <img src="{{this.imagePath}}" alt="..." class="card-img-top img-fluid">
-          <div class="card-block">
-            <h3 class="card-title">{{this.title}}</h3>
-            <div class="card-subtitle price">${{this.price}}</div>
-            <h5 class="card-text"><a href="#">{{this.category}}</a></h5>
-            <p class="card-text">{{this.description}}</p>
-            <div class="clearfix">              
-              <a href="/add-to-cart/{{this._id}}" class="btn btn-success pull-right" role="button">Add to Cart</a>
-            </div>
-          </div>
-        </div><!-- card -->
-      </div><!-- col-sm-6 col-md-4 -->
-    {{/each}}
+<div class="row">
+  <div class="col-md-2">
+    <div class="submenu">
+        <div class="mini-submenu">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </div>
+      <div class="list-group submenu-margin">
+          <span href="#" class="list-group-item">
+              Submenu
+              <span class="pull-right" id="slide-submenu">
+                  <i class="fa fa-times"></i>
+              </span>
+          </span>
+          <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> Lorem ipsum</a>
+          <a href="#" class="list-group-item"><i class="fa fa-search"></i> Lorem ipsum</a>
+          <a href="#" class="list-group-item"><i class="fa fa-user"></i> Lorem ipsum</a>
+          <a href="#" class="list-group-item"><i class="fa fa-folder-open-o"></i> Lorem ipsum</a>
+          <a href="#" class="list-group-item"><i class="fa fa-bar-chart-o"></i> Lorem ipsum</a>
+          <a href="#" class="list-group-item"><i class="fa fa-envelope"></i> Lorem ipsum</a>
+      </div> 
+    </div>
   </div>
-{{/each}}
+  <div class="col-md-10">
+    <h2>Product List</h2>
+    {{# each products }}
+      <div class="row">
+        {{# each this }}
+          <div class="col-sm-6 col-md-4">
+            <div class="card cardstyles">
+              <img src="{{this.imagePath}}" alt="..." class="card-img-top img-fluid">
+              <div class="card-block">
+                <h3 class="card-title">{{this.title}}</h3>
+                <div class="card-subtitle price">${{this.price}}</div>
+                <h5 class="card-text"><a href="#">{{this.category}}</a></h5>
+                <p class="card-text">{{this.description}}</p>
+                <div class="clearfix">              
+                  <a href="/add-to-cart/{{this._id}}" class="btn btn-success pull-right" role="button">Add to Cart</a>
+                </div>
+              </div>
+            </div><!-- card -->
+          </div><!-- col-sm-6 col-md-4 -->
+        {{/each}}
+      </div>
+    {{/each}}      
+  </div>
+</div>
