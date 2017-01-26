@@ -21,6 +21,28 @@
           <a href="#" class="list-group-item"><i class="fa fa-envelope"></i> Lorem ipsum</a>
       </div> 
     </div>
+    <div class="shopping-cart-home">
+      <h4>Shopping List</h4>
+      <ul class="list-group">
+        {{# if list }}
+          {{#each list}}
+            <li class="list-group-item">
+              <span class="badge">{{this.qty}}</span>
+              <span class="list-group-heading" data-toggle="collapse" data-parent="#list-group-accordion" data-target="#{{this.item._id}}" >
+                <strong>{{this.item.title}}</strong>
+              </span>
+              <span class="label label-success">${{this.price}}</span>
+              <a href="/reduce/{{this.item._id}}"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+              <a href="/remove/{{this.item._id}}"><i class="fa fa-times" aria-hidden="true"></i></a> 
+            </li>            
+          {{/each}}
+          <strong class="total-price">Total: <span>${{totalPrice}}</span></strong>
+          <a href="/shopping-cart/" class="btn btn-success">Order</a> 
+        {{else}}
+          <h6>There aren't any items in the cart</h6>
+        {{/if}}
+      </ul>
+    </div>
   </div>
   <div class="col-md-10">
     <h2>Product List</h2>

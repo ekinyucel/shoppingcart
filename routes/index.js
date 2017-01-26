@@ -11,13 +11,22 @@ router.use(csrfProtection); // all routes by managed this router should use csrf
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  var shoppinglist = null;
+  var totalPrice = 0;
+  
+  if(req.session.cart) {
+    var cart = new Cart(req.session.cart);
+    shoppinglist = cart.generateArray();
+    totalPrice = cart.totalPrice;
+  }    
+
   Product.find(function(err, data){
     var chunks = [];
     var chunksize = 3; // col-md-4 fits with 3
     for(var i=0; i < data.length; i += chunksize){
       chunks.push(data.slice(i, i + chunksize));
     }
-    res.render('index', { title: 'Shopping cart', products: chunks });
+    res.render('index', { title: 'Shopping cart', products: chunks, list: shoppinglist, totalPrice: totalPrice });
   });  
 });
 
