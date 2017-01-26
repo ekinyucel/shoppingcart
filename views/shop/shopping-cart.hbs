@@ -28,8 +28,23 @@
 <br/>
 <div class="row">
     <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-        <button type="button" class="btn btn-success">Order <span class="caret"></span></button> 
-    </div>
+        <span class="btn btn-success" data-toggle="collapse" data-parent="#list-group-accordion" data-target="#form" >Order <span class="caret"></span></span>
+        <br/>
+        <div id="form" class="collapse">
+            <form action="/user/signup" method="POST" role="form">  
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea cols="20" rows="10" class="form-control" id="address" name="address">Address</textarea>
+                </div>
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">    
+                {{# if login }}        
+                    <button type="submit" class="btn btn-primary">Buy Products</button>
+                {{ else }}
+                    <a href="/user/signin/" class="btn btn-primary">Sign in/Sign up</a>
+                {{/if}} 
+            </form>        
+        <div> 
+    </div>    
 </div>
 {{else}}
     <div class="row">
